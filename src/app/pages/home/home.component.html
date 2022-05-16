@@ -1,6 +1,13 @@
 <div class="container p-4">
-  <h1>All Departments</h1>
+  <div class="d-flex justify-content-between">
+    <h1>All Users</h1>
+    <span>
+      <button mat-raised-button color="primary" (click)="openForm()">Add User</button>
+    </span>
+  </div>
   <mat-divider></mat-divider>
+
+  <app-add-user></app-add-user>
 
   <div class="my-3">
     <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)"
@@ -60,8 +67,4 @@
   </div>
 
   <mat-divider></mat-divider>
-  <div class="mt-3">
-    <button mat-raised-button color="primary">Add Department</button>
-    <button mat-raised-button>Add User</button>
-  </div>
 </div>

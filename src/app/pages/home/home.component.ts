@@ -13,6 +13,7 @@ import { MatSort, Sort } from '@angular/material/sort';
 export class HomeComponent implements OnInit, AfterViewInit {
   allUsers: User[];
   dataSource: MatTableDataSource<User>;
+  isBtnClicked: boolean = false;
 
   constructor(
     private _liveAnnouncer: LiveAnnouncer,
@@ -50,5 +51,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
     } else {
       this._liveAnnouncer.announce('Sorting cleared');
     }
+  }
+
+  openForm() {
+    this.isBtnClicked = true;
   }
 }
