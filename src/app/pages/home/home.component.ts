@@ -11,6 +11,8 @@ import { UserService } from 'src/app/services/user.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort, Sort } from '@angular/material/sort';
 import { Subscription } from 'rxjs';
+import { DynamicHookDirective } from 'src/app/shared/dynamic-hook.directive';
+import { AddUserComponent } from 'src/app/includes/add-user/add-user.component';
 
 @Component({
   selector: 'app-home',
@@ -20,8 +22,9 @@ import { Subscription } from 'rxjs';
 export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   allUsers: User[];
   userSubscription: Subscription;
+  closeSubscription: Subscription;
   dataSource: MatTableDataSource<User>;
-  isBtnClicked: boolean = false;
+  @ViewChild(DynamicHookDirective) cmpHost: DynamicHookDirective;
 
   constructor(
     private _liveAnnouncer: LiveAnnouncer,
@@ -61,6 +64,18 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     } else {
       this._liveAnnouncer.announce('Sorting cleared');
     }
+  }
+
+  openAddUserForm() {
+    this.cmpHost.viewContainerRef.clear();
+    const addUserCmp =
+      this.cmpHost.viewContainerRef.createComponent(AddUserComponent);
+    this.closeSubscription = addUserCmp.instance.popupCloseEvent.subscribe(
+      () => {
+        this.closeSubscription.unsubscribe(),
+          this.cmpHost.viewContainerRef.clear();
+      }
+    );
   }
 
   ngOnDestroy(): void {

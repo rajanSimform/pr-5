@@ -2,12 +2,12 @@
   <div class="d-flex justify-content-between">
     <h1>All Users</h1>
     <span>
-      <button mat-raised-button color="primary" (click)="isBtnClicked = true">Add User</button>
+      <button mat-raised-button color="primary" (click)="openAddUserForm()">Add User</button>
     </span>
   </div>
   <mat-divider></mat-divider>
 
-  <app-add-user *ngIf="isBtnClicked" (popupCloseEvent)="isBtnClicked = false"></app-add-user>
+  <ng-template appDynamicHook></ng-template>
 
   <div class="my-3">
     <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)"

@@ -9,6 +9,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { AppMaterialModule } from './app-material/app-material.module';
 import { AddUserComponent } from './includes/add-user/add-user.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DynamicHookDirective } from './shared/dynamic-hook.directive';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     HeaderComponent,
     HomeComponent,
     AddUserComponent,
+    DynamicHookDirective,
   ],
   imports: [
     BrowserModule,

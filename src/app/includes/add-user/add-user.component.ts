@@ -11,7 +11,7 @@ import { User } from '../../models/user.model';
 export class AddUserComponent implements OnInit {
   form: FormGroup;
   hide: boolean = true;
-  @Output() popupCloseEvent = new EventEmitter<boolean>();
+  @Output() popupCloseEvent = new EventEmitter<void>();
 
   constructor(private fb: FormBuilder, private _userService: UserService) {}
 
