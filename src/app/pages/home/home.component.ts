@@ -1,17 +1,25 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort, Sort } from '@angular/material/sort';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit, AfterViewInit {
+export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   allUsers: User[];
+  userSubscription: Subscription;
   dataSource: MatTableDataSource<User>;
   isBtnClicked: boolean = false;
 
@@ -21,8 +29,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
-    this.allUsers = this._userService.getUsers();
-    this.dataSource = new MatTableDataSource(this.allUsers);
+    this.userSubscription = this._userService._userSubject.subscribe((x) => {
+      this.allUsers = x;
+      this.dataSource = new MatTableDataSource(x);
+    });
   }
 
   displayedColumns: string[] = [
@@ -53,7 +63,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }
   }
 
-  openForm() {
-    this.isBtnClicked = true;
+  ngOnDestroy(): void {
+    this.userSubscription.unsubscribe();
   }
 }

@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserService } from 'src/app/services/user.service';
+import { User } from '../../models/user.model';
 
 @Component({
   selector: 'app-add-user',
@@ -9,8 +11,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class AddUserComponent implements OnInit {
   form: FormGroup;
   hide: boolean = true;
+  @Output() popupCloseEvent = new EventEmitter<boolean>();
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private _userService: UserService) {}
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -27,8 +30,26 @@ export class AddUserComponent implements OnInit {
       ],
       dept: [null, [Validators.required]],
       designation: [null, [Validators.required]],
+      salary: [null, Validators.required],
     });
   }
 
-  saveDetails(form: FormGroup) {}
+  saveDetails(form: FormGroup) {
+    const { name, email, password, dept, salary, designation } = form.value;
+    const newUser = new User(
+      name,
+      email,
+      password,
+      dept,
+      salary,
+      designation,
+      new Date()
+    );
+    this._userService.addUser(newUser);
+    this.closePopup();
+  }
+
+  closePopup() {
+    this.popupCloseEvent.emit();
+  }
 }

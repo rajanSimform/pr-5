@@ -8,7 +8,7 @@
   background-color: rgba($color: #000000, $alpha: 0.35);
 }
 
-.wrapper .container{
+.container{
   z-index: 100;
   overflow:auto;
   background-color: white;
@@ -17,7 +17,28 @@
   left: 25vw;
   width: 50vw;
   height: 66vh;
+
+  .heading-row{
+    background-color: white;
+    position:sticky;
+    z-index: 101;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    top: 0px;
+  }
+
+  .form-wrapper{
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 30px;
+
+    mat-form-field{
+      margin-bottom: 10px;
+    }
+  }
 }
+
+
 ::-webkit-inner-spin-button {
   display: none;
 }

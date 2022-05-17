@@ -1,8 +1,11 @@
-<div class="wrapper">
-  <div class="container p-3 mat-elevation-z8">
+<div class="wrapper" (click)="closePopup()"></div>
+<div class="container mat-elevation-z8">
+  <div class="heading-row">
     <h2 class="text-center">Add User</h2>
     <mat-divider></mat-divider>
-    <form [formGroup]="form" #addUserForm (ngSubmit)="saveDetails(form)">
+  </div>
+  <div class="form-wrapper">
+    <form [formGroup]="form" #addUserForm (ngSubmit)="saveDetails(form)" class="d-flex flex-column">
       <!-- name field -->
       <mat-form-field appearance="standard">
           <mat-label>Name</mat-label>
@@ -22,7 +25,7 @@
       <!-- password field -->
       <mat-form-field appearance="standard">
         <mat-label>Enter your password</mat-label>
-        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" #pswdInput>
+        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" #pswdInput autocomplete="on">
         <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
           <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
         </button>
@@ -46,17 +49,19 @@
         <mat-error>Designation is required</mat-error>
       </mat-form-field>
 
-       <!-- salary field -->
-       <mat-form-field appearance="standard">
+        <!-- salary field -->
+        <mat-form-field appearance="standard">
         <mat-label>Salary</mat-label>
-        <input matInput type="number" class="example-right-align" placeholder="0">
+        <input matInput type="number" formControlName="salary" min="0" placeholder="0">
         <span span matPrefix>₹&nbsp;</span>
-        <mat-hint>Enter User Name</mat-hint>
-        <mat-error>Name is required</mat-error>
+        <mat-hint>Enter Salary</mat-hint>
+        <mat-error>Salary is required</mat-error>
       </mat-form-field>
-      <br>
       
-      <button mat-raised-button color="primary" type="submit" class="mt-3">Submit</button>
-  </form>
+      <span class="d-flex justify-content-end">
+        <button mat-raised-button color="primary" type="submit" class="mt-3">Submit</button>
+        <button mat-raised-button type="button" class="mt-3" (click)="closePopup()">Cancel</button>
+      </span>
+    </form>
   </div>
 </div>
