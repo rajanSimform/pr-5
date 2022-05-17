@@ -8,7 +8,7 @@
   <mat-divider></mat-divider>
 
   <ng-template appDynamicHook></ng-template>
-
+  
   <div class="my-3">
     <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)"
     class="mat-elevation-z8">
@@ -34,7 +34,8 @@
     <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by email">
       Email
     </th>
-    <td mat-cell *matCellDef="let element"> {{element.email | lowercase}} </td>
+    <td mat-cell *matCellDef="let element" [innerHTML]="element.email|lowercase|mailTo"> 
+    </td>
     </ng-container>
 
     <!-- department Column -->

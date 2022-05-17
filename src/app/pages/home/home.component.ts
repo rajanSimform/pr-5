@@ -25,7 +25,6 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   closeSubscription: Subscription;
   dataSource: MatTableDataSource<User>;
   @ViewChild(DynamicHookDirective) cmpHost: DynamicHookDirective;
-
   constructor(
     private _liveAnnouncer: LiveAnnouncer,
     private _userService: UserService
@@ -72,8 +71,8 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       this.cmpHost.viewContainerRef.createComponent(AddUserComponent);
     this.closeSubscription = addUserCmp.instance.popupCloseEvent.subscribe(
       () => {
-        this.closeSubscription.unsubscribe(),
-          this.cmpHost.viewContainerRef.clear();
+        this.closeSubscription.unsubscribe();
+        this.cmpHost.viewContainerRef.clear();
       }
     );
   }

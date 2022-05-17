@@ -10,6 +10,7 @@ import { AppMaterialModule } from './app-material/app-material.module';
 import { AddUserComponent } from './includes/add-user/add-user.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DynamicHookDirective } from './shared/dynamic-hook.directive';
+import { MailToPipe } from './shared/mail-to.pipe';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { DynamicHookDirective } from './shared/dynamic-hook.directive';
     HomeComponent,
     AddUserComponent,
     DynamicHookDirective,
+    MailToPipe,
   ],
   imports: [
     BrowserModule,
