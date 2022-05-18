@@ -5,6 +5,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class MailToPipe implements PipeTransform {
   transform(value: string): string {
-    return `<a href="${value}">${value}</a>`;
+    return `<a href="mailto:${value}">${value}</a>`;
   }
 }
